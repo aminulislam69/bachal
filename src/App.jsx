@@ -1,10 +1,31 @@
 
 
+
+import {
+  createBrowserRouter,
+  RouterProvider, Route, createRoutesFromElements
+} from "react-router-dom";
+
+import Resistration from "./pages/Registration";
+import Login from "./pages/Login";
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+    
+      <Route path="/" element={<Resistration />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+    
+    </>
+    
+  )
+);
+
 function App() {
-
-
   return (
- <h1>Bachal</h1>
+
+    <RouterProvider router={router} />
   )
 }
 
