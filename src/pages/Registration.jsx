@@ -35,19 +35,23 @@ let handleValues = (e) =>{
 
 let handlaeSubmit = ()=>{
 
-  let {email,password,fullname} = values
-
+  let {email,fullname,password}= values
 
   if(!email){
+    setValues({
+      ...values,
+      error: "Enter an email"
+    })
+    return
+  }
 
-    console.log("no email")
+
+  if(!fullname){
 
     setValues({
         ...values,
-        error: "Enter an Email"
+        error: "Enter fullname"
       })
-
-      console.log(values.email)
       return
   }
 
@@ -61,14 +65,7 @@ let handlaeSubmit = ()=>{
   }
 
 
-  if(!fullname){
-
-    setValues({
-        ...values,
-        error: "Enter Name"
-      })
-      return
-  }
+ 
 
   // setValues({
   //   ...values,
@@ -104,16 +101,27 @@ let handlaeSubmit = ()=>{
             <p className='regpara'>Free register and you can enjoy it</p>
             <div className='reginput'>
               <TextField value={values.email} onChange={handleValues} name = "email"  id="outlined-basic" label="Email Address" variant="outlined" />  
-              {values.error.includes("email") && <Alert severity="error">{values.error}</Alert>}
+              <div className='alertstyle'>
+                {values.error.includes("email") && <Alert severity="error">{values.error}</Alert>}
+              </div>
+              
             
             </div>
             <div className='reginput'>
               <TextField value={values.fullname} onChange={handleValues} name = "fullname" type='text' id="outlined-basic" label="Ful name" variant="outlined" />
-              {values.error.includes("fullname") && <Alert severity="error">{values.error}</Alert> }
+
+              <div className='alertstyle'>
+                {values.error.includes("fullname") && <Alert severity="error">{values.error}</Alert> }
+              </div>
+              
             </div>
             <div className='reginput'>
               <TextField value={values.password} onChange={handleValues} name = "password" type='password' id="outlined-basic" label="Password" variant="outlined" />
+
+              <div className='alertstyle'>
               {values.error.includes("password") && <Alert severity="error">{values.error}</Alert> }
+              </div>
+              
             </div>
             <div className='regbutton'>
                 
