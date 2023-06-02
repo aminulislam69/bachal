@@ -33,7 +33,7 @@ const Login = () => {
 
   let handlaeSubmit = ()=>{
 
-    let {email,password,fullname} = values
+    let {email,password} = values
   
     setValues({
       ...values,
@@ -43,9 +43,9 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
     .then((user) => {
       setValues({
-        email:"",
-         password:"",
-        loading: false
+          email:"",
+          password:"",
+          loading: false
       })
       console.log(user)
     })

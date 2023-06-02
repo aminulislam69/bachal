@@ -6,13 +6,15 @@ import { useState } from 'react'
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification} from "firebase/auth";
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useNavigate } from 'react-router-dom'
+import Alert from '@mui/material/Alert';
 
 
 let innitialvalue = {
   email:"",
   fullname:"",
   password:"",
-  loading: false
+  loading: false,
+  error: ""
 }
 
 const Resistration = () => {
@@ -35,27 +37,60 @@ let handlaeSubmit = ()=>{
 
   let {email,password,fullname} = values
 
-  setValues({
-    ...values,
-    loading: true
-  })
 
-  createUserWithEmailAndPassword(auth, email, password)
-  .then((user) => {
+  if(!email){
 
-    sendEmailVerification(auth.currentUser).then(()=>{
-      console.log("Email gase")
-    })
+    console.log("no email")
 
-    console.log(user)
     setValues({
-      email:"",
-      fullname:"",
-       password:"",
-      loading: false
-    })
-    // navigate("/login")
-  })
+        ...values,
+        error: "Enter an Email"
+      })
+
+      console.log(values.email)
+      return
+  }
+
+  if(!password){
+
+    setValues({
+        ...values,
+        error: "Enter password"
+      })
+      return
+  }
+
+
+  if(!fullname){
+
+    setValues({
+        ...values,
+        error: "Enter Name"
+      })
+      return
+  }
+
+  // setValues({
+  //   ...values,
+  //   loading: true
+  // })
+
+  // createUserWithEmailAndPassword(auth, email, password)
+  // .then((user) => {
+
+  //   sendEmailVerification(auth.currentUser).then(()=>{
+  //     console.log("Email gase")
+  //   })
+
+  //   console.log(user)
+  //   setValues({
+  //     email:"",
+  //     fullname:"",
+  //      password:"",
+  //     loading: false
+  //   })
+  //   // navigate("/login")
+  // })
   
   
 }
@@ -69,12 +104,16 @@ let handlaeSubmit = ()=>{
             <p className='regpara'>Free register and you can enjoy it</p>
             <div className='reginput'>
               <TextField value={values.email} onChange={handleValues} name = "email"  id="outlined-basic" label="Email Address" variant="outlined" />  
+              {values.error.includes("email") && <Alert severity="error">{values.error}</Alert>}
+            
             </div>
             <div className='reginput'>
-              <TextField value={values.fullname} onChange={handleValues} name = "fullname" type='text' id="outlined-basic" label="Ful name" variant="outlined" />  
+              <TextField value={values.fullname} onChange={handleValues} name = "fullname" type='text' id="outlined-basic" label="Ful name" variant="outlined" />
+              {values.error.includes("fullname") && <Alert severity="error">{values.error}</Alert> }
             </div>
             <div className='reginput'>
-              <TextField value={values.password} onChange={handleValues} name = "password" type='password' id="outlined-basic" label="Password" variant="outlined" />  
+              <TextField value={values.password} onChange={handleValues} name = "password" type='password' id="outlined-basic" label="Password" variant="outlined" />
+              {values.error.includes("password") && <Alert severity="error">{values.error}</Alert> }
             </div>
             <div className='regbutton'>
                 
