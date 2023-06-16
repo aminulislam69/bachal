@@ -1,31 +1,53 @@
-
-
-
 import {
   createBrowserRouter,
-  RouterProvider, Route, createRoutesFromElements
+  RouterProvider,
+  Route,
+    createRoutesFromElements,
 } from "react-router-dom";
-
-import Resistration from "./pages/Registration";
+import Registration from "./pages/Registration";
 import Login from "./pages/Login";
-
+import ForgotPassword from "./pages/ForgotPassword";
+import Home from "./pages/Home";
+  import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import Message from "./pages/Message";
+import RootLayout from "./components/RootLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-    
-      <Route path="/" element={<Resistration />}></Route>
+    <Route>
+      <Route path="/" element={<Registration />}></Route>
       <Route path="/login" element={<Login />}></Route>
-    
-    </>
-    
+      <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
+
+      <Route path="/bachal" element={<RootLayout />}>
+        <Route path="home" element={<Home />}></Route>
+        <Route path="message" element={<Message />}></Route>
+      </Route>
+     
+    </Route> 
   )
 );
 
+
 function App() {
   return (
+        <>
+           <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />
+       <RouterProvider router={router} />
+        </>
 
-    <RouterProvider router={router} />
   )
 }
 
