@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Headingforreglog = ({title, className}) => {
+const Headingforreglog = ({title,className}) => {
   return (
-    <h3 className = {className}>{title}</h3>
+    <h3 className={className}>{title}</h3>
   )
 }
 
